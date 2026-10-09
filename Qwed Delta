@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qwed Delta - منصة السكريبتات والذكاء الاصطناعي</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            margin-top: 20px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #38bdf8;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 1px solid #334155;
+        }
+        .card {
+            margin-bottom: 25px;
+        }
+        h2 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #38bdf8;
+        }
+        textarea, input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #475569;
+            background: #0f172a;
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        textarea {
+            resize: vertical;
+            height: 120px;
+        }
+        button {
+            background: #0284c7;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #0369a1;
+        }
+        .output-box {
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            margin-top: 10px;
+            min-height: 60px;
+            word-break: break-all;
+            color: #38bdf8;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Qwed Delta</h1>
+        <p>منصتك المتكاملة للسكريبتات وأدوات الذكاء الاصطناعي</p>
+    </header>
+
+    <div class="container">
+        <!-- قسم توليد النصوص أو الأكواد -->
+        <div class="card">
+            <h2>مولد الذكاء الاصطناعي الذكي</h2>
+            <input type="text" id="aiPrompt" placeholder="اكتب فكرتك أو طلبك هنا...">
+            <button onclick="generateContent()">توليد المحتوى</button>
+            <div class="output-box" id="aiOutput">النتيجة ستظهر هنا...</div>
+        </div>
+
+        <!-- قسم مركز السكريبتات -->
+        <div class="card">
+            <h2>مكتبة السكريبتات والأدوات</h2>
+            <textarea id="scriptInput" placeholder="اكتب السكريبت الخاص بك هنا لحفظه ومعالجته..."></textarea>
+            <button onclick="saveScript()">حفظ السكريبت</button>
+            <div class="output-box" id="scriptOutput">لم يتم حفظ أي سكريبت بعد.</div>
+        </div>
+    </div>
+
+    <script>
+        function generateContent() {
+            const prompt = document.getElementById('aiPrompt').value;
+            const output = document.getElementById('aiOutput');
+            if(prompt.trim() === "") {
+                output.innerText = "الرجاء إدخال طلب أولاً!";
+                return;
+            }
+            output.innerText = "جاري المعالجة بواسطة Qwed Delta AI... تم توليد الرد بنجاح لـ: " + prompt;
+        }
+
+        function saveScript() {
+            const script = document.getElementById('scriptInput').value;
+            const output = document.getElementById('scriptOutput');
+            if(script.trim() === "") {
+                output.innerText = "الرجاء كتابة سكريبت صالح للحفظ!";
+                return;
+            }
+            output.innerText = "تم حفظ السكريبت بنجاح وجاهز للاستخدام!";
+        }
+    </script>
+
+</body>
+</html>
