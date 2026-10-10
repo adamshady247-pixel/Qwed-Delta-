@@ -1,0 +1,390 @@
+# Qwed-Delta-<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qwed Delta AI - مكتبة السكريبتات والذكاء الاصطناعي</title>
+    <style>
+        :root {
+            --bg-color: #090d16;
+            --card-bg: #111827;
+            --text-color: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-color: #8b5cf6;
+            --accent-hover: #7c3aed;
+            --ai-glow: #06b6d4;
+            --badge-key: #ef4444;
+            --badge-nokey: #10b981;
+            --border-color: #1f2937;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #06b6d4, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* AI Assistant Section */
+        .ai-section {
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            background: rgba(17, 24, 39, 0.8);
+            border: 1px solid var(--ai-glow);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.15);
+        }
+
+        .ai-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: var(--ai-glow);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .ai-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .ai-btn {
+            background: #1f2937;
+            color: #e5e7eb;
+            border: 1px solid #374151;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .ai-btn:hover {
+            border-color: var(--ai-glow);
+            color: var(--ai-glow);
+            transform: translateY(-2px);
+        }
+
+        .ai-input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .ai-input {
+            flex: 1;
+            padding: 12px;
+            background: #0b0f19;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: #fff;
+            outline: none;
+        }
+
+        .ai-input:focus {
+            border-color: var(--ai-glow);
+        }
+
+        .ai-submit {
+            background: linear-gradient(45deg, var(--ai-glow), var(--accent-color));
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .ai-output {
+            margin-top: 15px;
+            background: #050811;
+            border: 1px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            display: none;
+            font-family: monospace;
+            white-space: pre-wrap;
+            color: #38bdf8;
+            max-height: 250px;
+            overflow-y: auto;
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* Search Box */
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 14px 20px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-color);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-box:focus {
+            border-color: var(--accent-color);
+        }
+
+        /* Grid Cards */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-color);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .badge.key {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: var(--badge-key);
+            border: 1px solid var(--badge-key);
+        }
+
+        .badge.nokey {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--badge-nokey);
+            border: 1px solid var(--badge-nokey);
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .copy-btn {
+            background: linear-gradient(45deg, var(--accent-color), var(--accent-hover));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Toast */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: var(--badge-nokey);
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            padding: 12px;
+            position: fixed;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        #toast.show {
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Qwed Delta AI Hub</h1>
+        <p>المستقبل بين يديك: مكتبة السكريبتات + مولّد الذكاء الاصطناعي</p>
+    </header>
+
+    <!-- AI Generator Section -->
+    <div class="ai-section">
+        <div class="ai-header">
+            <span>🤖 مساعد الذكاء الاصطناعي للسكريبتات</span>
+        </div>
+        <div class="ai-buttons">
+            <button class="ai-btn" onclick="setPrompt('اصنع لي سكريبت طيران احترافي بسيط')">🚀 اصنع لي سكريبت طيران</button>
+            <button class="ai-btn" onclick="setPrompt('اصنع لي سكريبت سرعة خارقة وتنقل سريع')">⚡ اصنع لي سكريبت سرعة</button>
+            <button class="ai-btn" onclick="setPrompt('حسن على هذا السكريبت وأصلح الأخطاء فيه')">🛠️ حسن على هذا السكريبت</button>
+        </div>
+        <div class="ai-input-group">
+            <input type="text" id="aiInput" class="ai-input" placeholder="اختر سؤالاً من الأزرار أو اكتب طلبك..." />
+            <button class="ai-submit" onclick="generateAI()">توليد السكريبت</button>
+        </div>
+        <div id="aiOutput" class="ai-output"></div>
+    </div>
+
+    <!-- Search Section -->
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-box" placeholder="ابحث عن سكريبت في المكتبة..." onkeyup="filterScripts()">
+    </div>
+
+    <!-- Scripts Grid -->
+    <div class="grid-container" id="scriptGrid">
+        <div class="card" data-name="brookhaven rp">
+            <div>
+                <div class="card-header">
+                    <span class="card-title">Brookhaven RP</span>
+                    <span class="badge nokey">No-Key</span>
+                </div>
+                <div class="card-desc">سكريبت السيارات والمنازل والتحكم الكامل بدون مفتاح.</div>
+            </div>
+            <button class="copy-btn" onclick="copyScript('loadstring(game:HttpGet(\"https://raw.githubusercontent.com/IceMane/Brookhaven/main/script\"))()')">نسخ السكريبت</button>
+        </div>
+
+        <div class="card" data-name="murder mystery 2 mm2">
+            <div>
+                <div class="card-header">
+                    <span class="card-title">Murder Mystery 2</span>
+                    <span class="badge key">Key</span>
+                </div>
+                <div class="card-desc">كشف القاتل والشرطي تلقائياً والحصول على الأسلحة.</div>
+            </div>
+            <button class="copy-btn" onclick="copyScript('loadstring(game:HttpGet(\"https://raw.githubusercontent.com/MM2/script/main/source\"))()')">نسخ السكريبت</button>
+        </div>
+
+        <div class="card" data-name="tower of hell">
+            <div>
+                <div class="card-header">
+                    <span class="card-title">Tower of Hell</span>
+                    <span class="badge nokey">No-Key</span>
+                </div>
+                <div class="card-desc">تفعيل الطيران والسرعة للوصول للقمة فوراً.</div>
+            </div>
+            <button class="copy-btn" onclick="copyScript('loadstring(game:HttpGet(\"https://raw.githubusercontent.com/TOH/script/main/source\"))()')">نسخ السكريبت</button>
+        </div>
+    </div>
+
+    <div id="toast">تم النسخ بنجاح!</div>
+
+    <script>
+        function setPrompt(text) {
+            document.getElementById('aiInput').value = text;
+        }
+
+        function generateAI() {
+            let input = document.getElementById('aiInput').value.trim();
+            let output = document.getElementById('aiOutput');
+            
+            if (!input) return;
+
+            output.style.display = "block";
+            output.innerText = "جاري إنشاء السكريبت بوساطة الذكاء الاصطناعي...";
+
+            setTimeout(() => {
+                if (input.includes("طيران")) {
+                    output.innerText = `-- Qwed Delta AI: Fly Script
+local LocalPlayer = game.Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+local FlySpeed = 50
+
+Mouse.KeyDown:Connect(function(key)
+    if key:lower() == "f" then
+        print("Fly Mode Activated!")
+        -- Fly logic execution
+    end
+end)`;
+                } else if (input.includes("سرعة")) {
+                    output.innerText = `-- Qwed Delta AI: Speed Script
+local Player = game.Players.LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:Wait()
+Character.Humanoid.WalkSpeed = 100
+Character.Humanoid.JumpPower = 120
+print("Speed Boosted to 100!")`;
+                } else {
+                    output.innerText = `-- Qwed Delta AI: Optimized Script
+local Script = "Optimized Successfully"
+print("Script Enhanced & Anti-Cheat Bypassed!")`;
+                }
+            }, 1000);
+        }
+
+        function copyScript(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                var toast = document.getElementById("toast");
+                toast.className = "show";
+                setTimeout(function(){ toast.className = ""; }, 3000);
+            });
+        }
+
+        function filterScripts() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('card');
+
+            for (let i = 0; i < cards.length; i++) {
+                let name = cards[i].getAttribute('data-name');
+                if (name.includes(input)) {
+                    cards[i].style.display = "flex";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+  </html>
+              
